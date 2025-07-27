@@ -1,0 +1,2 @@
+1. page.js is passed in Layout.js
+2. Layout.js is main part to show
