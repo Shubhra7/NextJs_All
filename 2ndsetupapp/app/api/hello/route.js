@@ -7,6 +7,7 @@ export async function GET(request) {
   });
 }
 
+
 export async function POST(request) {
   const body = await request.json();
   return new Response(JSON.stringify({ message: 'POST success', received: body }), {
