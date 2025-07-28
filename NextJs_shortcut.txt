@@ -5,3 +5,12 @@
 
 4. Keep all frontend routes in src/app/
    Keep all API routes in src/pages/api/
+
+
+
+5. for project setup follow ==> 2ndsetupapp
+***************
+new version:
+***************
+a. for page routing==> app/about/page.js
+b. for api routing==> app/api/hello/route.js 
