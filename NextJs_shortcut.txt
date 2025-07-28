@@ -18,3 +18,11 @@ b. for api routing==> app/api/hello/route.js
 
 6. for dynamic routing ==> 2ndsetupapp
    a. app/blogpost/[sno]/pages.js   ====> http://localhost:3000/blogpost/raju
+
+
+
+7. Title change metadata is good 
+export const metadata = {
+  title: "About Us",
+  description: "Learn more about our team and mission.",
+};
