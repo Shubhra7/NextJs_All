@@ -52,4 +52,55 @@ export const metadata = {
 10. for css ==>
 	a. app/about/About.module.css
 	b. import styles from './About.module.css';
+
+
+
+
+11. 🧩 What is styled-jsx?
+styled-jsx is a CSS-in-JS styling solution built into Next.js by default.
+It allows you to write scoped CSS directly inside your component files — without any extra setup.
+
+'use client';
+export default function About() {
+  return (
+    <div>
+      <h1>Hello About Page</h1>
+      <p>This is a styled paragraph.</p>
+
+      <style jsx>{`
+        h1 {
+          color: teal;
+        }
+        p {
+          font-size: 18px;
+          color: #444;
+        }
+      `}</style>
+    </div>
+  );
+}
+🔒 Why use styled-jsx?
+
+Styles are scoped only to the component
+
+No naming conflicts
+
+No need for .css files or module.css
+
+
+
+******Can you use global styles?
+
+Yes! Just add the global attribute:
+<style jsx global>{`
+  body {
+    margin: 0;
+    font-family: Arial;
+  }
+`}</style>
+
+
+12. 'use client'; ==> when need to do client side rendering 
+
+
 	
