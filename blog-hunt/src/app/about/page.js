@@ -11,7 +11,7 @@ export default function AboutPage () {
       <h1>About hello</h1>
 
 
-      <Script src="/sj.js" strategy="afterInteractive"></Script>
+      <Script src="/sj.js" strategy="beforeInteractive"></Script>
     </>
   );
 }

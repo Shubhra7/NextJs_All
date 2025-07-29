@@ -1,2 +1,2 @@
 console.log("Hello js")
-alert("Hello bubai js")
+alert("Welcome to About Page!!")
