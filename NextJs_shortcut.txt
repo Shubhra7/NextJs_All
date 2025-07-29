@@ -47,3 +47,9 @@ export const metadata = {
 8.      <Script src="/sj.js" strategy="afterInteractive"></Script>
 
 9. Image tag do=> lazyLoad
+
+
+10. for css ==>
+	a. app/about/About.module.css
+	b. import styles from './About.module.css';
+	

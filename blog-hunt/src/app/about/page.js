@@ -1,4 +1,5 @@
 import Script from "next/script";
+import styles from './About.module.css';
 
 export const metadata = {
   title: "About Us",
@@ -8,8 +9,9 @@ export const metadata = {
 export default function AboutPage () {
   return (
     <>
-      <h1>About hello</h1>
-
+    <div className={styles.container}>
+      <h1 className={styles.heading}>About hello</h1>
+    </div>
 
       <Script src="/sj.js" strategy="beforeInteractive"></Script>
     </>

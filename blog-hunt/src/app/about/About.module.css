@@ -1,0 +1,12 @@
+/* About.module.css */
+.heading {
+  color: darkblue;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.container {
+  padding: 20px;
+  background-color: #dcc8c8;
+  text-align: center;
+}
