@@ -1,6 +1,8 @@
 import styles from './Blog.module.css';
 import Link from 'next/link';
 
+// step1 : Collect all the files from blogdata directory
+// Step2 : Iterate through the and Display them
 const page = () => {
   return (
      <div className={styles.container}>

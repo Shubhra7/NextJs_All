@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../BlogPost.module.css'
 
+// Step 1: Find the file corresponding to the slug
+// Step 2: Populate them inside the page
 const page = async({params}) => {
     const {slug} = await params
   return (
