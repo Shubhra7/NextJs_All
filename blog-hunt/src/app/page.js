@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -5,14 +6,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className={styles.page}>
-      <nav className={styles.mainnav}>
-        <ul>
-          <Link href='/'><li>Home</li></Link>
-          <Link href='/blog'><li>Blog</li></Link>
-          <Link href='/about'><li>About</li></Link>
-          <Link href='/contact'><li>Contact</li></Link>
-        </ul>
-      </nav>
       <main className={styles.main}>
         <ol>
           <h1>Welcome to Shubhra Blog channel</h1>
@@ -21,6 +14,14 @@ export default function Home() {
 
        <div className="blogs">
         <h2>Popular Blogs</h2>
+        <style jsx>{`
+          h2{
+            font-size:39px;
+          }
+          h3{
+            font-size: 29px
+          }
+        `}</style>
         <div className="blogItem">
           <h3>How to learn Javascript in 2022?</h3>
           <p>Javascipt is the language used to design logic for the web</p>
