@@ -140,4 +140,8 @@ Yes! Just add the global attribute:
 13.JSON.parse() ==> JSON/String to JS-Object
    JSON.stringify() ==> JS-Object to JSON
 
+
+14. api/blogs ==> for all endpoint in one place
+    api/getblog ==> dynamic slug for each resource fetch
+
 	

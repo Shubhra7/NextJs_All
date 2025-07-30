@@ -1,24 +1,53 @@
+'use client';
+import { useEffect, useState } from 'react';
 import styles from './Blog.module.css';
 import Link from 'next/link';
+import axios from 'axios';
 
 // step1 : Collect all the files from blogdata directory
 // Step2 : Iterate through the and Display them
 const page = () => {
+  const [blogs,setBlogs] = useState([])
+
+  // fetching all blogs from endpoint
+  useEffect(()=>{
+    console.log("Use Effect is running");
+
+    // fetch('http://localhost:3000/api/blogs').then((a)=>{
+    //   return a.json(); })
+    //   .then((data)=>{
+    //     console.log(data);
+    //   })
+
+    axios.get('http://localhost:3000/api/blogs')
+      .then((responese)=>{
+        console.log(responese.data);
+        setBlogs(responese.data)
+      })
+      .catch((err)=>{
+        console.error('Error fetching blogs: ',err)
+      })
+  },[])   // added [] to prevent repeated calls
+
+
   return (
-     <div className={styles.container}>
+    <>
+    <div className={styles.container}>
       <main className={styles.main}>
-        <div>
-          <Link href={'/blogpost/learn-javascript'}>
-          <h3 className={styles.blogItemh3}>How to learn Javascript in 2022?</h3></Link>
-          <p>Javascipt is the language used to design logic for the web</p>
-        </div>
-        <br/>
-        <div className="blogItem">
-          <h3>How to learn Javascript in 2022?</h3>
-          <p>Javascipt is the language used to design logic for the web</p>
-        </div>
+        {blogs.map((blogitem)=>{
+          return <div key={blogitem.title}>
+            <Link href={'/blogpost/learn-javascript'}>
+            <h3 className={styles.blogItemh3}>{blogitem.title}</h3></Link>
+            <p>{blogitem.content}</p>
+            <br></br>
+            <br />
+          </div>
+        })}
       </main>
      </div>
+
+     
+  </>
     
   )
 }
