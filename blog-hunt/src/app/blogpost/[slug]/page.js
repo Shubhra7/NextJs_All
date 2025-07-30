@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
+import styles from '../BlogPost.module.css'
 
 const page = async({params}) => {
     const {slug} = await params
   return (
-    <div>
-      <p>This profile is of: {slug}</p>
-      {/* "slug" name is manditory for dynamic routing*/}
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <br />
+        <h1>Title of the page: {slug}</h1>
+        <br />
+        <hr className={styles.hrLine}/>
+        <br />
+        <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus soluta, quasi voluptate, laudantium eligendi quam autem consequuntur omnis ipsam nihil praesentium quis quidem.</div>
+      </main>
     </div>
   )
 }
