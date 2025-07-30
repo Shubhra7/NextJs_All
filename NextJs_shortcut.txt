@@ -142,6 +142,6 @@ Yes! Just add the global attribute:
 
 
 14. api/blogs ==> for all endpoint in one place
-    api/getblog ==> dynamic slug for each resource fetch
+    api/getblog ==> dynamic slug for each resource fetch blog
 
 	

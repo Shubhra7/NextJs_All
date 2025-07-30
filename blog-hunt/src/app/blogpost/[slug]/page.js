@@ -1,10 +1,29 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import styles from '../BlogPost.module.css'
+import axios from 'axios';
+import { useParams } from 'next/navigation';
 
 // Step 1: Find the file corresponding to the slug
 // Step 2: Populate them inside the page
-const page = async({params}) => {
-    const {slug} = await params
+const page = () => {
+    const params = useParams();
+    const slug =  params?.slug;
+    const [blog,setBlog] = useState(null);
+
+    useEffect(()=>{
+      if(!slug) return;
+      
+      axios.get(`http://localhost:3000/api/getblog?slug=${slug}`)
+      .then((responese)=>{
+        // console.log(responese.data);
+        setBlog(responese.data)
+      })
+      .catch((err)=>{
+        console.error('Error fetching blogs: ',err)
+      })
+    },[slug])
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -13,7 +32,14 @@ const page = async({params}) => {
         <br />
         <hr className={styles.hrLine}/>
         <br />
-        <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus soluta, quasi voluptate, laudantium eligendi quam autem consequuntur omnis ipsam nihil praesentium quis quidem.</div>
+        {blog ? (
+          <div>
+            <h2>{blog.title}</h2>
+            <p>{blog.content.substr(0,340)}</p>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
       </main>
     </div>
   )

@@ -21,7 +21,7 @@ const page = () => {
 
     axios.get('http://localhost:3000/api/blogs')
       .then((responese)=>{
-        console.log(responese.data);
+        // console.log(responese.data);
         setBlogs(responese.data)
       })
       .catch((err)=>{
@@ -35,10 +35,10 @@ const page = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         {blogs.map((blogitem)=>{
-          return <div key={blogitem.title}>
-            <Link href={'/blogpost/learn-javascript'}>
-            <h3 className={styles.blogItemh3}>{blogitem.title}</h3></Link>
-            <p>{blogitem.content}</p>
+          return <div key={blogitem.slug}>
+            <Link href={`/blogpost/${blogitem.slug}`}>
+            <h3 className={styles.blogItemh3}>{blogitem.title}?</h3></Link>
+            <p>{blogitem.content.substr(0,340)}</p>
             <br></br>
             <br />
           </div>
