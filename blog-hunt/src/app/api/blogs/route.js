@@ -6,7 +6,7 @@ export async function GET(request) {
     try {
         const dirPath = path.join(process.cwd(),'src','blogdata');
         const files = await fs.readdir(dirPath);
-        console.log(typeof files);
+        // console.log(typeof files);
         
         
 
