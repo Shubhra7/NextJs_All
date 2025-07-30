@@ -1,5 +1,6 @@
 import {promises as fs} from 'fs';
 import path from 'path';
+// http://localhost:3000/api/blogs
 
 export async function GET(request) {
     try {
