@@ -175,9 +175,23 @@ export async function getStaticProps() {
 Like buying snacks from a vending machine — they were prepared earlier and are ready instantly.
 
 
+
 17. For Frontend==>  const params = useParams();
     		     const slug =  params?.slug;
+
 18. For Backend==> const { searchParams } = new URL(request.url);
     		   console.log(searchParams);
     		   const slug = searchParams.get('slug');
+
+
+
+19. Correct way (for dynamic route segment /api/getblog/how-to-learn-js)
+// app/api/getblog/[slug]/route.js
+
+export async function GET(request, { params }) {
+  const { slug } = params;
+  console.log("Slug:", slug);
+  return Response.json({ message: `Slug is ${slug}` });
+}
+
 	
