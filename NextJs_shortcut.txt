@@ -144,4 +144,34 @@ Yes! Just add the global attribute:
 14. api/blogs ==> for all endpoint in one place
     api/getblog ==> dynamic slug for each resource fetch blog
 
+
+
+15. Server-Side Rendering (SSR)
+🔹 What is it?
+SSR means your page is generated on the server at the time of the request. Every time a user requests the page, the server runs the code, fetches the data, builds the HTML, and sends it back.
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://api.example.com/data`);
+  const data = await res.json();
+  return { props: { data } };
+}
+
+Think of a restaurant that cooks food only when you order. You wait a bit longer, but it's fresh and specific to your request.
+
+
+
+
+
+16. Static Site Generation (SSG)
+🔹 What is it?
+SSG means the HTML is pre-generated at build time (i.e., during npm run build) and served instantly on request.
+
+export async function getStaticProps() {
+  const res = await fetch('https://api.example.com/data');
+  const data = await res.json();
+  return { props: { data } };
+}
+
+Like buying snacks from a vending machine — they were prepared earlier and are ready instantly.
+
 	
