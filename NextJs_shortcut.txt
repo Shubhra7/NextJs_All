@@ -194,4 +194,40 @@ export async function GET(request, { params }) {
   return Response.json({ message: `Slug is ${slug}` });
 }
 
+
+
+
+## getServerSideProps, getStaticProps, and getInitialProps
+
+blog-hunt
+12. app/blog/page.js
+
+In the latest Next.js App Router (using the app/ directory), traditional data fetching methods like getServerSideProps, getStaticProps, and getInitialProps are no longer supported. Instead, server-side rendering (SSR) and static generation are handled more flexibly through server components, which are the default unless 'use client' is specified. In your current setup, app/blog/page.js is a client component (due to 'use client'), so it fetches data on the browser after the page loads using axios, which doesn't benefit SEO or faster initial rendering. You also use a route handler (app/api/blogs/route.js) to serve blog data by reading local files — a good practice. To fully leverage SSR and improve performance and SEO, you should remove 'use client' and fetch blog data directly in the component using await fetch() with { cache: 'no-store' } for SSR or { next: { revalidate: 60 } } for ISR. This shift reflects Next.js's modern approach to server-first rendering with improved flexibility and performance.
+
+ISR is like SSG with superpowers — it keeps your pages static and fast, but allows updates without a full rebuild.
+
+
+### For SSR (Server Side Rendering)
+const res = await fetch('http://localhost:3000/api/blogs',{
+    cache: 'no-store', // <- disables caching for SSR
+  })
+  const blogs = await res.json();
+
+
+### For ISR / SSG ####
+
+// app/blog/page.js
+export const revalidate = 60; // Enables ISR
+
+export default async function BlogPage() {
+  const res = await fetch('http://localhost:3000/api/blogs', {
+    cache: 'force-cache', // optional: use this to allow static caching
+  });
+  const blogs = await res.json();
+
+  return (
+    // render blogs here
+  );
+}
+
 	

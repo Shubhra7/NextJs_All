@@ -1,33 +1,47 @@
-'use client';
-import { useEffect, useState } from 'react';
+// 'use client';  ###
+// import { useEffect, useState } from 'react';  ##
 import styles from './Blog.module.css';
 import Link from 'next/link';
 import axios from 'axios';
 
+// export const revalidate = 60; // Enables ISR
+
 // step1 : Collect all the files from blogdata directory
 // Step2 : Iterate through the and Display them
-const page = () => {
-  const [blogs,setBlogs] = useState([])
+const page = async () => {   // async for making it SSR
+  
+  // const [blogs,setBlogs] = useState([])  ##
 
+  // ****************  CSR ***********
   // fetching all blogs from endpoint
-  useEffect(()=>{
-    console.log("Use Effect is running");
+  // useEffect(()=>{
+  //   console.log("Use Effect is running");
 
-    // fetch('http://localhost:3000/api/blogs').then((a)=>{
-    //   return a.json(); })
-    //   .then((data)=>{
-    //     console.log(data);
-    //   })
+  //   // fetch('http://localhost:3000/api/blogs').then((a)=>{
+  //   //   return a.json(); })
+  //   //   .then((data)=>{
+  //   //     console.log(data);
+  //   //   })
 
-    axios.get('http://localhost:3000/api/blogs')
-      .then((responese)=>{
-        // console.log(responese.data);
-        setBlogs(responese.data)
-      })
-      .catch((err)=>{
-        console.error('Error fetching blogs: ',err)
-      })
-  },[])   // added [] to prevent repeated calls
+  //   // #### when CSR (client Side rendering happening)
+  //   axios.get('http://localhost:3000/api/blogs')
+  //     .then((responese)=>{
+  //       // console.log(responese.data);
+  //       setBlogs(responese.data)
+  //     })
+  //     .catch((err)=>{
+  //       console.error('Error fetching blogs: ',err)
+  //     })
+  // },[])   // added [] to prevent repeated calls
+
+
+
+  // ****************  SSR [ServerSide rendering] ***********
+  const res = await fetch('http://localhost:3000/api/blogs',{
+    cache: 'no-store',      // <- disables caching for SSR 
+    // cache: 'force-cache', // <- when SSG(static site generation)
+  })
+  const blogs = await res.json();
 
 
   return (
@@ -47,8 +61,16 @@ const page = () => {
      </div>
 
      
-  </>
-    
+  </>    
   )
 }
+
+
+// Previously used
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {harry: "Good boy"},  // will be passed to the page component as props
+//   }
+  
+// }
 export default page
