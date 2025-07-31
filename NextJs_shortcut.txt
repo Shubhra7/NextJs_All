@@ -230,4 +230,28 @@ export default async function BlogPage() {
   );
 }
 
+
+
+
+
+13. generateStaticParams() 
+
+In Next.js App Router, generateStaticParams() is used to statically pre-render dynamic routes at build time, replacing the older getStaticPaths() from the Pages Router. This function is especially useful when working with dynamic segments like [slug], where it tells Next.js which paths to pre-generate. When used along with export const revalidate = ..., it also enables Incremental Static Regeneration (ISR), allowing pages to be updated at runtime without needing a full rebuild. This approach improves performance and SEO, as the pages are served faster from the static cache while still keeping content reasonably up to date. It’s most effective for blog posts or product pages where the slugs are known ahead of time and don’t change frequently.
+
+
+export async function generateStaticParams() {
+  const res = await fetch('http://localhost:3000/api/blogs');
+  const blogs = await res.json();
+
+  return blogs.map(blog => ({
+    slug: blog.slug, // { slug: 'first-post' }
+  }));
+}
+
+// Optional: for ISR
+export const revalidate = 60; // Regenerate page every 60 seconds
+
+const page = async ({ params }) => {
+  const slug = params?.slug;
+
 	
