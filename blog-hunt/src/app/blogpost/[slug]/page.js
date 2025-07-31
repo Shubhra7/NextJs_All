@@ -1,28 +1,34 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+// 'use client';
+// import React, { useEffect, useState } from 'react';
 import styles from '../BlogPost.module.css'
 import axios from 'axios';
-import { useParams } from 'next/navigation';
+// import { useParams } from 'next/navigation';
 
 // Step 1: Find the file corresponding to the slug
 // Step 2: Populate them inside the page
-const page = () => {
-    const params = useParams();
-    const slug =  params?.slug;
-    const [blog,setBlog] = useState(null);
+const page = async ({params}) => {
+    // const params = useParams();
+    // const slug =  params?.slug;
+    // const [blog,setBlog] = useState(null);
 
-    useEffect(()=>{
-      if(!slug) return;
+    // useEffect(()=>{
+    //   if(!slug) return;
       
-      axios.get(`http://localhost:3000/api/getblog?slug=${slug}`)
-      .then((responese)=>{
-        // console.log(responese.data);
-        setBlog(responese.data)
-      })
-      .catch((err)=>{
-        console.error('Error fetching blogs: ',err)
-      })
-    },[slug])
+    //   axios.get(`http://localhost:3000/api/getblog?slug=${slug}`)
+    //   .then((responese)=>{
+    //     // console.log(responese.data);
+    //     setBlog(responese.data)
+    //   })
+    //   .catch((err)=>{
+    //     console.error('Error fetching blogs: ',err)
+    //   })
+    // },[slug])
+
+    const slug = params?.slug
+    const res = await fetch(`http://localhost:3000/api/getblog?slug=${slug}`,{
+      cache: 'no-store'
+    })
+    const blog = await res.json()
 
   return (
     <div className={styles.container}>
