@@ -30,6 +30,10 @@ const page = async ({params}) => {
     })
     const blog = await res.json()
 
+    function createMarkup(c) {
+      return {__html: c};
+    }
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -41,7 +45,9 @@ const page = async ({params}) => {
         {blog ? (
           <div>
             <h2>{blog.title}</h2>
-            <p>{blog.content.substr(0,340)}</p>
+            <br />
+            {/* <p>{blog.content.substr(0,340)}</p> */}
+            {<div dangerouslySetInnerHTML={createMarkup(blog.content)}></div>}
           </div>
         ) : (
           <div>Loading...</div>

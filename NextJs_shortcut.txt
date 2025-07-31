@@ -254,4 +254,10 @@ export const revalidate = 60; // Regenerate page every 60 seconds
 const page = async ({ params }) => {
   const slug = params?.slug;
 
+
+
+
+14. For rendering the HTML code in frontend
+	we use==> dangerouslySetInnerHTML of react  (app/blogpost/[slug])
+
 	

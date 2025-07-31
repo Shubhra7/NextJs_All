@@ -52,7 +52,7 @@ const page = async () => {   // async for making it SSR
           return <div key={blogitem.slug}>
             <Link href={`/blogpost/${blogitem.slug}`}>
             <h3 className={styles.blogItemh3}>{blogitem.title}?</h3></Link>
-            <p>{blogitem.content.substr(0,340)}</p>
+            <p>{blogitem.metadesc}</p>
             <br></br>
             <br />
           </div>
