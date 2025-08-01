@@ -1,77 +1,41 @@
 'use client';
 import Image from "next/image";
 import styles from "./page.module.css";
-import Link from "next/link";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <ol>
-          <h1>Welcome to Shubhra Blog channel</h1>
-        </ol>
-        <p>Created by Shubhrajit! </p>
+        <section className={styles.heroSection}>
+          <h1 className={styles.heroTitle}>Welcome to Shubhra's Blog 🚀</h1>
+          <p className={styles.heroSubtitle}>Insights, Code, and Creativity by <strong>Shubhrajit Ghosh</strong></p>
+        </section>
 
-       <div className="blogs">
-        <h2>Popular Blogs</h2>
-        <style jsx>{`
-          h2{
-            font-size:39px;
-          }
-          h3{
-            font-size: 29px
-          }
-        `}</style>
-        <div className="blogItem">
-          <h3>How to learn Javascript in 2022?</h3>
-          <p>Javascipt is the language used to design logic for the web</p>
-        </div>
-       </div>
+        <section className={styles.blogIntro}>
+          <h2>🔥 Featured Topics</h2>
+          <div className={styles.blogGrid}>
+            <div className={styles.blogCard}>
+              <h3>JavaScript in 2025</h3>
+              <p>Explore the evolving landscape of JavaScript, frameworks, and what's next.</p>
+            </div>
+            <div className={styles.blogCard}>
+              <h3>Next.js 14 Highlights</h3>
+              <p>Learn how to master app routing, server components, and edge functions.</p>
+            </div>
+            <div className={styles.blogCard}>
+              <h3>React UI Tips</h3>
+              <p>Level up your React apps with optimized rendering and modern UI libraries.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.aboutMe}>
+          <h2>🧠 About This Blog</h2>
+          <p>
+            This blog is a collection of thoughts, tutorials, and guides built by a passionate web developer on a mission to explore the full stack. Built with ❤️ using <strong>Next.js</strong>.
+          </p>
+        </section>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }

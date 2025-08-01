@@ -1,49 +1,51 @@
-// 'use client';  ###
-// import { useEffect, useState } from 'react';  ##
+'use client';  // ✅ Required for client-side rendering (CSR)
+import { useEffect, useState } from 'react';  // ✅ React Hooks
 import styles from './Blog.module.css';
 import Link from 'next/link';
 import axios from 'axios';
+import InfiniteScroll from 'react-infinite-scroll-component';  // ✅ Infinite scroll lib
 
 // export const revalidate = 60; // Enables ISR
 
 // step1 : Collect all the files from blogdata directory
-// Step2 : Iterate through the and Display them
-const page = async () => {   // async for making it SSR
+// Step2 : Iterate through them and Display them
+export default function page() {   // async removed since we use CSR now
   
   // const [blogs,setBlogs] = useState([])  ##
 
   // ****************  CSR ***********
+  const [blogs, setBlogs] = useState([]);
+  const [count, setCount] = useState(3);  // initial blogs to show
+  const [hasMore, setHasMore] = useState(true);  // track if more blogs exist
+
   // fetching all blogs from endpoint
-  // useEffect(()=>{
-  //   console.log("Use Effect is running");
+  useEffect(() => {
+    // console.log("Use Effect is running");
 
-  //   // fetch('http://localhost:3000/api/blogs').then((a)=>{
-  //   //   return a.json(); })
-  //   //   .then((data)=>{
-  //   //     console.log(data);
-  //   //   })
+    axios.get('/api/blogs')
+      .then((response) => {
+        // console.log(response.data);
+        setBlogs(response.data.slice(0, count));
+        setHasMore(count < response.data.length);
+      })
+      .catch((err) => {
+        console.error('Error fetching blogs: ', err);
+      });
+  }, [count]);  // dependency on count for dynamic update
 
-  //   // #### when CSR (client Side rendering happening)
-  //   axios.get('http://localhost:3000/api/blogs')
-  //     .then((responese)=>{
-  //       // console.log(responese.data);
-  //       setBlogs(responese.data)
-  //     })
-  //     .catch((err)=>{
-  //       console.error('Error fetching blogs: ',err)
-  //     })
-  // },[])   // added [] to prevent repeated calls
+  // 📦 fetch more data on scroll
+  const fetchMoreData = async () => {
+    const res = await axios.get('/api/blogs');
+    const total = res.data.length;
 
+    if (count >= total) {
+      setHasMore(false);  // no more to load
+      return;
+    }
 
-
-  // ****************  SSR [ServerSide rendering] ***********
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  
-  const res = await fetch(`${baseUrl}/api/blogs`,{
-    cache: 'no-store',      // <- disables caching for SSR 
-    // cache: 'force-cache', // <- when SSG(static site generation)
-  })
-  const blogs = await res.json();
+    setBlogs(res.data.slice(0, count + 3));  // load 3 more
+    setCount(count + 3);
+  };
 
   return (
     <>
@@ -53,23 +55,35 @@ const page = async () => {   // async for making it SSR
             ✍️ Latest Blog Posts
           </h1>
 
-          {blogs.map((blogitem) => {
-            return (
-              <div className={styles.card} key={blogitem.slug}>
-                <Link href={`/blogpost/${blogitem.slug}`}>
-                  <h3 className={styles.blogItemh3}>{blogitem.title}</h3>
-                </Link>
-                <p className={styles.blogMeta}>
-                  By <strong>{blogitem.author}</strong> | 📅 Published recently
-                </p>
-                <p className={styles.blogDesc}>
-                  {blogitem.metadesc.length > 160
-                    ? blogitem.metadesc.slice(0, 160) + '...'
-                    : blogitem.metadesc}
-                </p>
-              </div>
-            );
-          })}
+          <InfiniteScroll
+            dataLength={blogs.length}
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={<h4 style={{ color: '#aaa' }}>Loading more blogs...</h4>}
+            endMessage={
+              <p style={{ textAlign: 'center', color: '#aaa' }}>
+                <b>Yay! You have seen it all ✨</b>
+              </p>
+            }
+          >
+            {blogs.map((blogitem) => {
+              return (
+                <div className={styles.card} key={blogitem.slug}>
+                  <Link href={`/blogpost/${blogitem.slug}`}>
+                    <h3 className={styles.blogItemh3}>{blogitem.title}</h3>
+                  </Link>
+                  <p className={styles.blogMeta}>
+                    By <strong>{blogitem.author}</strong> | 📅 Published recently
+                  </p>
+                  <p className={styles.blogDesc}>
+                    {blogitem.metadesc.length > 160
+                      ? blogitem.metadesc.slice(0, 160) + '...'
+                      : blogitem.metadesc}
+                  </p>
+                </div>
+              );
+            })}
+          </InfiniteScroll>
         </main>
       </div>
     </>
@@ -82,4 +96,3 @@ const page = async () => {   // async for making it SSR
 //     props: {harry: "Good boy"},  // will be passed to the page component as props
 //   }
 // }
-export default page;

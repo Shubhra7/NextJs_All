@@ -1,3 +1,15 @@
+/* === Page Load Animation === */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .container {
   max-width: 800px;
   margin: 60px auto;
@@ -5,9 +17,10 @@
   background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px); /* Optional glass effect */
+  backdrop-filter: blur(10px);
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeInSlideUp 0.8s ease-out both;
 }
 
 .heading {
@@ -42,12 +55,25 @@
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
   color: #fff;
-  transition: border-color 0.3s ease;
+  transition: 
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 0 0 transparent;
 }
 
 .input::placeholder,
 .textarea::placeholder {
   color: #aaa;
+  animation: placeholderGlow 2s infinite ease-in-out;
+}
+
+.input:hover,
+.textarea:hover {
+  transform: translateY(-2px);
+  border-color: #66b2ff;
+  box-shadow: 0 4px 12px rgba(102, 178, 255, 0.2);
 }
 
 .input:focus,
@@ -55,6 +81,7 @@
   border-color: #66b2ff;
   background-color: rgba(255, 255, 255, 0.08);
   outline: none;
+  box-shadow: 0 0 10px rgba(102, 178, 255, 0.5);
 }
 
 .textarea {
@@ -71,49 +98,17 @@
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
   background: linear-gradient(to right, #0056b3, #0096c7);
+  transform: translateY(-3px);
 }
 
-/* === Enhanced input/textarea animations === */
-.input,
-.textarea {
-  transition: 
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    transform 0.2s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 0 0 transparent;
-}
-
-/* Subtle lift effect on hover */
-.input:hover,
-.textarea:hover {
-  transform: translateY(-2px);
-  border-color: #66b2ff;
-  box-shadow: 0 4px 12px rgba(102, 178, 255, 0.2);
-}
-
-/* Glow effect on focus */
-.input:focus,
-.textarea:focus {
-  border-color: #66b2ff;
-  background-color: rgba(255, 255, 255, 0.08);
-  outline: none;
-  box-shadow: 0 0 10px rgba(102, 178, 255, 0.5);
-}
-
-/* Optional: animated placeholder glow */
+/* === Placeholder animation === */
 @keyframes placeholderGlow {
   0%   { color: #aaa; }
   50%  { color: #ccc; }
   100% { color: #aaa; }
-}
-
-.input::placeholder,
-.textarea::placeholder {
-  animation: placeholderGlow 2s infinite ease-in-out;
 }

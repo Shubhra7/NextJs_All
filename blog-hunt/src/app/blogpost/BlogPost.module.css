@@ -89,3 +89,88 @@
     transform: translateY(0);
   }
 }
+
+/* Existing styles remain unchanged above... */
+
+/* 🌐 Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .blogCard {
+    padding: 1.5rem;
+  }
+
+  .blogTitle {
+    font-size: 2rem;
+  }
+
+  .blogContent {
+    font-size: 1rem;
+  }
+
+  .contentHtml h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-top: 3rem;
+    align-items: center;
+  }
+
+  .blogTitle {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .blogMeta {
+    font-size: 0.85rem;
+  }
+
+  .blogContent {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .contentHtml h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .blogCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .blogTitle {
+    font-size: 1.6rem;
+  }
+
+  .blogMeta {
+    font-size: 0.8rem;
+  }
+
+  .blogContent {
+    font-size: 0.9rem;
+  }
+
+  .contentHtml p {
+    font-size: 0.9rem;
+  }
+
+  .contentHtml h2 {
+    font-size: 1.2rem;
+  }
+
+  .contentHtml ul {
+    padding-left: 1rem;
+  }
+}
