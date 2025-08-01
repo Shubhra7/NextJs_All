@@ -24,8 +24,10 @@ const page = async ({params}) => {
     //   })
     // },[slug])
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    
     const slug = params?.slug
-    const res = await fetch(`http://localhost:3000/api/getblog?slug=${slug}`,{
+    const res = await fetch(`${baseUrl}/api/getblog?slug=${slug}`,{
       cache: 'no-store'
     })
     const blog = await res.json()

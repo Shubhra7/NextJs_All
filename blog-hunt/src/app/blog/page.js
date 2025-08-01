@@ -37,7 +37,9 @@ const page = async () => {   // async for making it SSR
 
 
   // ****************  SSR [ServerSide rendering] ***********
-  const res = await fetch('http://localhost:3000/api/blogs',{
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  
+  const res = await fetch(`${baseUrl}/api/blogs`,{
     cache: 'no-store',      // <- disables caching for SSR 
     // cache: 'force-cache', // <- when SSG(static site generation)
   })

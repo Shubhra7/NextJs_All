@@ -1,12 +1,61 @@
-/* About.module.css */
-.heading {
-  color: darkblue;
-  font-size: 2rem;
-  margin-bottom: 10px;
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);  /* Transparent black background */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  color: #fff;  /* Text color white to contrast against black background */
 }
 
-.container {
-  padding: 20px;
-  background-color: #dcc8c8;
+.title {
+  font-size: 2.8rem;
   text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;  /* White color for text */
+}
+
+.highlight {
+  color: #0070f3;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #0070f3;
+}
+
+.list {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.list li {
+  margin-bottom: 0.6rem;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: green;
+  font-weight: bold;
+}
+
+.link {
+  color: #0070f3;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #0051c3;
 }

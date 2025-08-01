@@ -260,4 +260,6 @@ const page = async ({ params }) => {
 14. For rendering the HTML code in frontend
 	we use==> dangerouslySetInnerHTML of react  (app/blogpost/[slug])
 
+https://legacy.reactjs.org/docs/dom-elements.html
+
 	
