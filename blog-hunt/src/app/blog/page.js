@@ -45,34 +45,41 @@ const page = async () => {   // async for making it SSR
   })
   const blogs = await res.json();
 
-
   return (
     <>
-    <div className={styles.container}>
-      <main className={styles.main}>
-        {blogs.map((blogitem)=>{
-          return <div key={blogitem.slug}>
-            <Link href={`/blogpost/${blogitem.slug}`}>
-            <h3 className={styles.blogItemh3}>{blogitem.title}?</h3></Link>
-            <p>{blogitem.metadesc}</p>
-            <br></br>
-            <br />
-          </div>
-        })}
-      </main>
-     </div>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: '#2c3e50' }}>
+            ✍️ Latest Blog Posts
+          </h1>
 
-     
-  </>    
-  )
+          {blogs.map((blogitem) => {
+            return (
+              <div className={styles.card} key={blogitem.slug}>
+                <Link href={`/blogpost/${blogitem.slug}`}>
+                  <h3 className={styles.blogItemh3}>{blogitem.title}</h3>
+                </Link>
+                <p className={styles.blogMeta}>
+                  By <strong>{blogitem.author}</strong> | 📅 Published recently
+                </p>
+                <p className={styles.blogDesc}>
+                  {blogitem.metadesc.length > 160
+                    ? blogitem.metadesc.slice(0, 160) + '...'
+                    : blogitem.metadesc}
+                </p>
+              </div>
+            );
+          })}
+        </main>
+      </div>
+    </>
+  );
 }
-
 
 // Previously used
 // export async function getServerSideProps(context) {
 //   return {
 //     props: {harry: "Good boy"},  // will be passed to the page component as props
 //   }
-  
 // }
-export default page
+export default page;
